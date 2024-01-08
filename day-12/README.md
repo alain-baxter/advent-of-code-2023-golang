@@ -1,0 +1,39 @@
+## --- Day 12: Hot Springs ---
+
+link: https://adventofcode.com/2023/day/12
+
+Example part 1 output for the two example data:
+```
+# go run main.go example1.txt
+2024/01/03 18:33:44 Pattern: ???.### Groupings: [1 1 3]
+2024/01/03 18:33:44 Number of matching options: 1
+2024/01/03 18:33:44 Pattern: .??..??...?##. Groupings: [1 1 3]
+2024/01/03 18:33:44 Number of matching options: 4
+2024/01/03 18:33:44 Pattern: ?#?#?#?#?#?#?#? Groupings: [1 3 1 6]
+2024/01/03 18:33:44 Number of matching options: 1
+2024/01/03 18:33:44 Pattern: ????.#...#... Groupings: [4 1 1]
+2024/01/03 18:33:44 Number of matching options: 1
+2024/01/03 18:33:44 Pattern: ????.######..#####. Groupings: [1 6 5]
+2024/01/03 18:33:44 Number of matching options: 4
+2024/01/03 18:33:44 Pattern: ?###???????? Groupings: [3 2 1]
+2024/01/03 18:33:44 Number of matching options: 10
+2024/01/03 18:33:44 Sum of matches: 21
+```
+
+Example part 2 output for the example data:
+```
+# go run main.go example1.txt
+2024/01/08 08:01:12 Pattern: ???.###????.###????.###????.###????.### Groupings: [1 1 3 1 1 3 1 1 3 1 1 3 1 1 3]
+2024/01/08 08:01:12 Number of matching options: 1
+2024/01/08 08:01:12 Pattern: .??..??...?##.?.??..??...?##.?.??..??...?##.?.??..??...?##.?.??..??...?##. Groupings: [1 1 3 1 1 3 1 1 3 1 1 3 1 1 3]
+2024/01/08 08:01:12 Number of matching options: 16384
+2024/01/08 08:01:12 Pattern: ?#?#?#?#?#?#?#???#?#?#?#?#?#?#???#?#?#?#?#?#?#???#?#?#?#?#?#?#???#?#?#?#?#?#?#? Groupings: [1 3 1 6 1 3 1 6 1 3 1 6 1 3 1 6 1 3 1 6]
+2024/01/08 08:01:12 Number of matching options: 1
+2024/01/08 08:01:12 Pattern: ????.#...#...?????.#...#...?????.#...#...?????.#...#...?????.#...#... Groupings: [4 1 1 4 1 1 4 1 1 4 1 1 4 1 1]
+2024/01/08 08:01:12 Number of matching options: 16
+2024/01/08 08:01:12 Pattern: ????.######..#####.?????.######..#####.?????.######..#####.?????.######..#####.?????.######..#####. Groupings: [1 6 5 1 6 5 1 6 5 1 6 5 1 6 5]
+2024/01/08 08:01:12 Number of matching options: 2500
+2024/01/08 08:01:12 Pattern: ?###??????????###??????????###??????????###??????????###???????? Groupings: [3 2 1 3 2 1 3 2 1 3 2 1 3 2 1]
+2024/01/08 08:01:12 Number of matching options: 506250
+2024/01/08 08:01:12 Sum of matches: 525152
+```
