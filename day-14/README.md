@@ -2,7 +2,7 @@
 
 link: https://adventofcode.com/2023/day/14
 
-Example part 1 output for the two example data:
+Example part 1 output for the example data:
 ```
 # go run main.go example1.txt
 2024/01/08 15:30:27 Platform:
