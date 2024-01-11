@@ -112,7 +112,7 @@ func FollowStart(pipes map[string]Pipe, pipe Pipe) (Pipe, Pipe) {
 	return possible[0], possible[1]
 }
 
-func (p Pipe) GetIntersections(pipes map[string]Pipe) int {
+func (p Pipe) GetIntersections(pipes map[string]Pipe, doLog bool) int {
 	intersections := 0
 	current := p
 	ok := true
@@ -139,7 +139,9 @@ func (p Pipe) GetIntersections(pipes map[string]Pipe) int {
 		}
 	}
 
-	log.Printf("Intercetions from %v: %d", p, intersections)
+	if doLog {
+	  log.Printf("Intercetions from %v: %d", p, intersections)
+	}
 	return intersections
 }
 

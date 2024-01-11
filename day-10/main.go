@@ -78,7 +78,7 @@ func main() {
 			continue
 		}
 
-		intersections := v.GetIntersections(pipes)
+		intersections := v.GetIntersections(pipes, true)
 		if intersections%2 != 0 {
 			inside++
 		}
