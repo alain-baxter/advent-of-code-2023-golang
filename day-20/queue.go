@@ -1,5 +1,7 @@
 package main
 
+import "alain-baxter/aoc-2023/utils"
+
 // FIFO queue
 type MessageQueue struct {
 	entries           []Message
@@ -43,7 +45,7 @@ func (q MessageQueue) checkRxPrecursorCycles() (int, bool) {
 	count := 0
 	product := 1
 	for _, cycle := range q.rxPrecursorCycles {
-		product = lcm(product, cycle)
+		product = utils.Lcm(product, cycle)
 		count++
 	}
 
@@ -91,17 +93,4 @@ func (q MessageQueue) toRX(broadcast Broadcast) int {
 			}
 		}
 	}
-}
-
-// gcd calculates the greatest common divisor of a and b.
-func gcd(a int, b int) int {
-	if b == 0 {
-		return a
-	}
-	return gcd(b, a%b)
-}
-
-// lcm calculates the least common multiple of a and b.
-func lcm(a int, b int) int {
-	return (a / gcd(a, b)) * b
 }

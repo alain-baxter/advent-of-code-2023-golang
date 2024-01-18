@@ -1,45 +1,21 @@
 package main
 
 import (
-	"bufio"
+	"alain-baxter/aoc-2023/utils"
 	"log"
 	"os"
 	"strings"
 )
 
 func main() {
-	var filepath string
-
-	args := os.Args
-	if len(args) > 1 {
-		filepath = args[1]
-	} else {
-		log.Fatal("Need to pass file path as argument")
-	}
-
-	file, err := os.Open(filepath)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	var lines []string
-	for scanner.Scan() {
-		text := scanner.Text()
-		log.Println(text)
-		lines = append(lines, text)
-	}
+	lines := utils.LoadFile(os.Args)
 
 	broadcast := parseInput(lines)
-
 	queue := MessageQueue{entries: []Message{}, lowCount: 0, highCount: 0, rxPrecursorCount: 0, rxPrecursorCycles: make(map[Module]int)}
-
 	output := queue.execute(broadcast, 1000)
 	log.Println("(Part 1) After 1000 button pushes:", output)
 
 	broadcast = parseInput(lines)
-
 	rxIter := queue.toRX(broadcast)
 	log.Println("(Part 2) First iteration that rx got a low:", rxIter)
 }
