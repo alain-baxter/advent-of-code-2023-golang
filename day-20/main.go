@@ -39,7 +39,7 @@ func parseInput(lines []string) Broadcast {
 			broadcast = Broadcast{[]Module{}}
 			modules[label] = &broadcast
 		} else {
-			null := Null{}
+			null := Null{label}
 			modules[label] = &null
 		}
 	}

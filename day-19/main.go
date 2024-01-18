@@ -40,7 +40,7 @@ func main() {
 
 		if parsePhase == 0 {
 			workflow := part.ParseWorkflow(text)
-		  workflows[workflow.Label] = workflow
+			workflows[workflow.Label] = workflow
 		} else {
 			parts = append(parts, part.ParsePart(text))
 		}

@@ -4,7 +4,6 @@ import "log"
 
 type Module interface {
 	Pulse(from Module, queue *MessageQueue, high bool, iterations int)
-	IsOriginalState() bool
 	AddInput(input Module)
 	AddOutput(output Module)
 	IsRX() bool
@@ -12,7 +11,7 @@ type Module interface {
 
 // Flip-flop
 type FlipFlop struct {
-	State bool
+	State        bool
 	Destinations []Module
 }
 
@@ -24,10 +23,6 @@ func (f *FlipFlop) Pulse(_ Module, queue *MessageQueue, high bool, _ int) {
 			queue.add(Message{from: f, to: dest, high: f.State})
 		}
 	}
-}
-
-func (f *FlipFlop) IsOriginalState() bool {
-	return !f.State
 }
 
 func (f *FlipFlop) AddInput(_ Module) {
@@ -44,7 +39,7 @@ func (f *FlipFlop) IsRX() bool {
 
 // Conjunction
 type Conjunction struct {
-	InputMemory map[Module]bool
+	InputMemory  map[Module]bool
 	Destinations []Module
 }
 
@@ -72,17 +67,6 @@ func (c *Conjunction) Pulse(from Module, queue *MessageQueue, high bool, iterati
 	}
 }
 
-func (c *Conjunction) IsOriginalState() bool {
-	r := true
-	for _, high := range c.InputMemory {
-		if high {
-			r = false
-			break
-		}
-	}
-	return r
-}
-
 func (c *Conjunction) AddInput(input Module) {
 	c.InputMemory[input] = false
 }
@@ -106,10 +90,6 @@ func (b *Broadcast) Pulse(_ Module, queue *MessageQueue, high bool, _ int) {
 	}
 }
 
-func (b *Broadcast) IsOriginalState() bool {
-	return true
-}
-
 func (b *Broadcast) AddInput(_ Module) {
 	// NOOP
 }
@@ -126,15 +106,10 @@ func (b *Broadcast) IsRX() bool {
 
 type Null struct {
 	label string
-	state bool
 }
 
-func (n *Null) Pulse(_ Module, _ *MessageQueue, high bool, _ int) {
-	n.state = high
-}
-
-func (n *Null) IsOriginalState() bool {
-	return true
+func (n *Null) Pulse(_ Module, _ *MessageQueue, _ bool, _ int) {
+	// NOOP
 }
 
 func (n *Null) AddInput(_ Module) {

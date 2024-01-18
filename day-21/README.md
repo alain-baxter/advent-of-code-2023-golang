@@ -33,5 +33,5 @@ Example part 1 output for the example data:
 
 Example part 2 output for the example data:
 ```
-
+# There was no given example for the part 2 solution
 ```

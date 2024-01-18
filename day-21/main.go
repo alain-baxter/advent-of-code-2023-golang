@@ -22,7 +22,7 @@ func main() {
 }
 
 type Tile struct {
-	x, y int
+	x, y       int
 	gardenPlot bool
 }
 
@@ -70,7 +70,7 @@ func doSteps(garden *[][]Tile, start Tile, steps int) int {
 		newActive := []Tile{}
 
 		var seen *[]Tile
-		if step % 2 == 0 {
+		if step%2 == 0 {
 			seen = &evenTiles
 		} else {
 			seen = &oddTiles
@@ -84,7 +84,7 @@ func doSteps(garden *[][]Tile, start Tile, steps int) int {
 	}
 
 	var count int
-	if steps % 2 == 0 {
+	if steps%2 == 0 {
 		count = len(evenTiles)
 	} else {
 		count = len(oddTiles)
@@ -125,10 +125,9 @@ func getNext(tile Tile, garden *[][]Tile, seen *[]Tile, step int) []Tile {
 		*seen = append(*seen, maybe)
 		r = append(r, maybe)
 	}
-	
+
 	return r
 }
-
 
 func doStepsGeometrically(garden *[][]Tile, start Tile, steps int) {
 	evenCount, oddCount, evenCorners, oddCorners := countGarden(garden, start)
@@ -138,8 +137,8 @@ func doStepsGeometrically(garden *[][]Tile, start Tile, steps int) {
 	// The number of repetitions of the garden for the given steps
 	n := (steps - start.x) / rowSize
 	log.Println("Row Size:", rowSize, "Times:", n)
-	if steps % 2 == 0 {
-		 log.Fatal("Only created count for odd steps geometrically since that was the problem")
+	if steps%2 == 0 {
+		log.Fatal("Only created count for odd steps geometrically since that was the problem")
 	} else {
 		// Laying out an example. Since rowSize is odd the garden will switch between even and odd parity nodes being
 		// activated. This leads to (n+1)^2 odd parity full sections, and n^2 even parity full sections. Since the axis
@@ -172,12 +171,12 @@ func countGarden(garden *[][]Tile, start Tile) (int, int, int, int) {
 
 			// Even point
 			even := false
-			if distance % 2 == 0 {
+			if distance%2 == 0 {
 				evenCount++
 				even = true
-			// Odd Point
+				// Odd Point
 			} else {
-			  oddCount++
+				oddCount++
 			}
 
 			corner := distance > start.x

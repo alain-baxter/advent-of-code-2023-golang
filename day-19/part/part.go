@@ -17,9 +17,9 @@ type Workflow struct {
 }
 
 type Rule struct {
-	On, Op string
+	On, Op     string
 	Comparitor int
-	Dest string
+	Dest       string
 }
 
 const GREATER string = ">"
@@ -39,7 +39,7 @@ const MAX_RATING int = 4000
 func ParseWorkflow(text string) Workflow {
 	parts := strings.Split(text, "{")
 	label := parts[0]
-	rules := parseRules(parts[1][:len(parts[1]) - 1])
+	rules := parseRules(parts[1][:len(parts[1])-1])
 
 	return Workflow{label, rules}
 }
@@ -54,8 +54,8 @@ func parseRules(text string) []Rule {
 			groups := r.FindStringSubmatch(rule)
 			comparitor, _ := strconv.Atoi(groups[3])
 			rules = append(rules, Rule{groups[1], groups[2], comparitor, groups[4]})
-		
-		// A testless rule
+
+			// A testless rule
 		} else {
 			rules = append(rules, Rule{Dest: rule})
 		}
@@ -65,7 +65,7 @@ func parseRules(text string) []Rule {
 
 // {x=787,m=2655,a=1222,s=2876}
 func ParsePart(text string) Part {
-	parts := strings.Split(text[1:len(text) - 1], ",")
+	parts := strings.Split(text[1:len(text)-1], ",")
 	x, _ := strconv.Atoi(parts[0][2:])
 	m, _ := strconv.Atoi(parts[1][2:])
 	a, _ := strconv.Atoi(parts[2][2:])
@@ -105,12 +105,12 @@ func (r Rule) Test(p Part) (string, bool) {
 	// Greater than rule
 	if r.Op == GREATER && test > r.Comparitor {
 		return r.Dest, true
-	
-	// Less than rule
+
+		// Less than rule
 	} else if r.Op == LESS && test < r.Comparitor {
 		return r.Dest, true
-	
-	// Doesn't match
+
+		// Doesn't match
 	} else {
 		return "", false
 	}
@@ -198,7 +198,6 @@ func PathsToAccepted(workflows map[string]Workflow) uint64 {
 }
 
 func findCombinations(workflow Workflow, workflows map[string]Workflow, ranges Tracker) uint64 {
-	//log.Println("Workflow:", workflow, "Ranges:", ranges)
 	result := uint64(0)
 	forward := ranges
 	for _, rule := range workflow.Rules {
@@ -222,10 +221,10 @@ func findCombinations(workflow Workflow, workflows map[string]Workflow, ranges T
 
 func getCombinations(ranges Tracker) uint64 {
 	log.Println("Accepting:", ranges)
-	return uint64(ranges.x.end - ranges.x.start + 1) * 
-				 uint64(ranges.m.end - ranges.m.start + 1) * 
-				 uint64(ranges.a.end - ranges.a.start + 1) * 
-				 uint64(ranges.s.end - ranges.s.start + 1)
+	return uint64(ranges.x.end-ranges.x.start+1) *
+		uint64(ranges.m.end-ranges.m.start+1) *
+		uint64(ranges.a.end-ranges.a.start+1) *
+		uint64(ranges.s.end-ranges.s.start+1)
 }
 
 func splitRange(rule Rule, ranges Tracker) (Tracker, Tracker) {

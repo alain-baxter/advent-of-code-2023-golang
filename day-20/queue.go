@@ -4,10 +4,10 @@ import "alain-baxter/aoc-2023/utils"
 
 // FIFO queue
 type MessageQueue struct {
-	entries           []Message
+	entries []Message
 	// For part 1
-	lowCount          int
-	highCount         int
+	lowCount  int
+	highCount int
 	// For part 2
 	rxPrecursorCount  int
 	rxPrecursorCycles map[Module]int
@@ -58,8 +58,10 @@ func (q MessageQueue) checkRxPrecursorCycles() (int, bool) {
 
 func (q MessageQueue) execute(broadcast Broadcast, iterations int) int {
 	for i := 0; i < iterations; i++ {
+		// Press Button
 		q.add(Message{from: nil, to: &broadcast, high: false})
 
+		// Loop to completion
 		for {
 			msg := q.pop()
 			msg.to.Pulse(msg.from, &q, msg.high, i)
@@ -75,8 +77,10 @@ func (q MessageQueue) execute(broadcast Broadcast, iterations int) int {
 
 func (q MessageQueue) toRX(broadcast Broadcast) int {
 	for i := 1; ; i++ {
+		// Press Button
 		q.add(Message{from: nil, to: &broadcast, high: false})
 
+		// Loop until completion OR we figure out the cycles to RX and calculate the press count
 		for {
 			msg := q.pop()
 			msg.to.Pulse(msg.from, &q, msg.high, i)
